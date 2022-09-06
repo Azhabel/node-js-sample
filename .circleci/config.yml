@@ -9,8 +9,8 @@ jobs :
 
   steps:
     -checkout
-    - run :
-        name : listprocess
+    - run:
+        name: listprocess
         command: |
           systemctl start docker
           ps -aux | grep docker
