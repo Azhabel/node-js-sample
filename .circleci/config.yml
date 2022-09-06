@@ -3,7 +3,7 @@ jobs :
   build:
     working_directory: /app
     docker :
-      - image: cimg/base:node:lastest
+      - image: cimg/base:stable
 
     steps:
       - checkout
@@ -11,7 +11,7 @@ jobs :
       - run:
           name: listprocess
           command: |
-            systemctl restart docker
-            ps -aux | grep docker
-            docker build -t test .
-            docker run -p 8080:8080 --name test_container test
+            sudo systemctl restart docker
+            sudo ps -aux | grep docker
+            sudo docker build -t test .
+            sudo docker run -p 8080:8080 --name test_container test
