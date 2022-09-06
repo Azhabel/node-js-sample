@@ -18,5 +18,4 @@ jobs :
 
       - run :
           name : curlCont
-          command : |
-          docker run --network container:test_container --name test_curl appropriate/curl --retry 10 --retry-connrefused http://localhost:8080
+          command : docker run --network container:test_container --name test_curl appropriate/curl --retry 10 --retry-connrefused http://localhost:8080
