@@ -1,32 +1,17 @@
-# This config is equivalent to both the '.circleci/extended/orb-free.yml' and the base '.circleci/config.yml'
-version: 2.1
-
-
+version : 2
 jobs :
-  list-proces:
-  docker :
-    - image: cimg/base:node:lastest
+  build:
+    working_directory: /app
+    docker :
+      - image: cimg/base:node:lastest
 
-  steps:
-    -checkout
-    - run:
-        name: listprocess
-        command: |
-          systemctl start docker
-          ps -aux | grep docker
-          docker built test .
-          docker run -p 8080 test
-
-# Invoke jobs via workflows
-# See: https://circleci.com/docs/2.0/configuration-reference/#workflows
-workflows:
-  sample: # This is the name of the workflow, feel free to change it to better match your workflow.
-    # Inside the workflow, you define the jobs you want to run.
-    jobs:
-      - listprocess:
-          version: '16.10'
-          pkg-manager: npm
-  
-
-
-          
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+          name: listprocess
+          command: |
+            systemctl restart docker
+            ps -aux | grep docker
+            docker build -t test .
+            docker run -p 8080:8080 --name test_container test
