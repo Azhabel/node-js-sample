@@ -10,9 +10,9 @@ jobs :
   steps:
     -checkout
     - run:
-      name : "listprocess"
-      command:
-        system start docker
+      name : listprocess
+      command: |
+        systemctl start docker
         ps -aux | grep docker
         docker built test .
         docker run -p 8080 test
