@@ -10,7 +10,5 @@ jobs :
       - run:
           name: listprocess
           command: |
-            sudo systemctl restart docker
-            sudo ps -aux | grep docker
             sudo docker build -t test .
             sudo docker run -p 8080:8080 --name test_container test
